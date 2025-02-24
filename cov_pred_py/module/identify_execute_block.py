@@ -25,6 +25,8 @@ class IdentifyExecuteBlock:
         for path, executed_block in another_executed_block.items():
             if path in self.executed_block.keys():
                 ans_executed_block[path] = executed_block
+            else:
+                ans_executed_block[path] = [0] * len(executed_block)
         vector = [item for key in ans_executed_block for item in ans_executed_block[key]]
         return vector
 
