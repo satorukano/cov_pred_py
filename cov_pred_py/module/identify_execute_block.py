@@ -5,10 +5,10 @@ from sortedcontainers import SortedSet
 
 class IdentifyExecuteBlock:
 
-    def __init__(self, block_range, database, test_trace_id):
+    def __init__(self, block_range, database, signature):
         self.block_range = block_range  
-        self.execution_path = database.get_execution_trace(test_trace_id)
-        self.test_trace_id = test_trace_id
+        self.execution_path = database.get_execution_trace(signature)
+        self.signature = signature
         self.executed_block = None
     
     def get_executed_block(self):

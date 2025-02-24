@@ -22,18 +22,18 @@ class Database:
             port=DB_PORT
         )
     
-    def get_execution_trace(self, test_trace_id):
+    def get_execution_trace(self, signature):
         self.open_cur()
-        self.cur.execute("SELECT * FROM trace.trace_in_source WHERE test_trace_id = %s", (test_trace_id,))
+        self.cur.execute("SELECT * FROM trace.trace_in_source LEFT JOIN trace.trace_in_test ON trace.trace_in_source.test_trace_id = trace.trace_in_test.test_trace_id WHERE signature = %s", (signature,))
         traces = self.cur.fetchall()
         self.close_cur()
         return traces
     
-    def get_trace_ids(self, registry_id):
+    def get_signatures(self, registry_id):
         self.open_cur()
-        self.cur.execute("SELECT test_trace_id FROM trace.trace_in_test WHERE registry_id = %s", (registry_id,))
-        trace_ids = self.cur.fetchall()
-        return trace_ids
+        self.cur.execute("SELECT DISTINCT signature FROM trace.trace_in_test WHERE registry_id = %s", (registry_id,))
+        signatures = self.cur.fetchall()
+        return signatures
     
     def open_cur(self):
         self.cur = self.conn.cursor()
