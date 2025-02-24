@@ -1,0 +1,19 @@
+[project]
+name = "cov-pred-py"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "satorukano",email = "kiritomo0206@icloud.com"}
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "psycopg2 (>=2.9.10,<3.0.0)",
+    "sortedcontainers (>=2.4.0,<3.0.0)",
+    "python-dotenv (>=1.0.1,<2.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
