@@ -10,6 +10,7 @@ from module.Trainer import Trainer
 from module.dnn_classifier import DNNClassifier
 
 def main():
+    print("start processing data.....")
     db = Database()
     signatures = db.get_signatures(1)
     json_open = open("block_range.json", 'r')
