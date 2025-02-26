@@ -35,6 +35,12 @@ class Database:
         signatures = self.cur.fetchall()
         return signatures
     
+    def get_log(self, signature, registry_id):
+        self.open_cur()
+        self.cur.execute("SELECT log.log_statement.statement FROM log.log_statement LEFT JOIN log.logs_in_test ON log.log_statement.test_method_id = log.logs_in_test.test_method_id WHERE signature = %s AND registry_id = %s", (signature, registry_id))
+        logs = self.cur.fetchall()
+        return logs
+    
     def open_cur(self):
         self.cur = self.conn.cursor()
 
