@@ -1,5 +1,6 @@
 import json
 import pickle
+import torch
 import torch.nn as nn
 import torch.optim as optim
 
@@ -11,12 +12,14 @@ from module.dnn_classifier import DNNClassifier
 
 def main():
     print("start processing data.....")
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print("device:", device)
     db = Database()
     signatures = db.get_signatures(1)
     json_open = open("block_range.json", 'r')
     block_range = json.load(json_open)
     ans_signature = signatures[0][0]
-    vectorizer = VectorizeLog()
+    vectorizer = VectorizeLog(device)
     ans_ieb = IdentifyExecuteBlock(block_range, db, ans_signature)
     ans_labels = {}
     ans_labels[ans_signature] = ans_ieb.create_vector()
@@ -45,6 +48,7 @@ def main():
     print("finish processing data.....")
 
     classifier = DNNClassifier(768, 512, labels_dim)
+    classifier.to(device)
     criterion = nn.BCEWithLogitsLoss()  # 多ラベル分類用の損失関数
     optimizer = optim.Adam(classifier.parameters(), lr=2e-5)
 
