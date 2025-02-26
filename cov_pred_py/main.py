@@ -25,7 +25,6 @@ def main():
     ans_labels[ans_signature] = ans_ieb.create_vector()
     labels_dim = len(ans_labels[ans_signature])
     logs = db.get_log(ans_signature, 1)
-    vectorizer = VectorizeLog()
     target_vector = vectorizer.vectorize(logs)
     vectors = {}
     vectors[ans_signature] = target_vector
