@@ -31,7 +31,7 @@ class Database:
     
     def get_signatures(self, registry_id):
         self.open_cur()
-        self.cur.execute("SELECT signature, MIN(test_trace_id) FROM trace.trace_in_test WHERE registry_id = %s ORDER by MIN(trace.trace_in_test.test_trace_id) ASC", (registry_id,))
+        self.cur.execute("SELECT signature, MIN(test_trace_id) FROM trace.trace_in_test WHERE registry_id = %s GROUP BY signature ORDER by MIN(trace.trace_in_test.test_trace_id) ASC", (registry_id,))
         signatures = self.cur.fetchall()
         return signatures
     
