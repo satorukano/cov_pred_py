@@ -7,6 +7,7 @@ class VectorizeLog:
         self.model = RobertaModel.from_pretrained('microsoft/codebert-base')
 
     def vectorize(self, logs):
+        print("Vectorizing logs...")
         formatted_logs = self.format_logs(logs)
         joined_logs = " </s> ".join(formatted_logs)
         input_text = "<s> " + joined_logs + " </s>"
