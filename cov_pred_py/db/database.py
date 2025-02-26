@@ -31,7 +31,7 @@ class Database:
     
     def get_signatures(self, registry_id):
         self.open_cur()
-        self.cur.execute("SELECT DISTINCT signature FROM trace.trace_in_test WHERE registry_id = %s", (registry_id,))
+        self.cur.execute("SELECT DISTINCT signature, test_trace_id FROM trace.trace_in_test WHERE registry_id = %s ORDER by trace.trace_in_test.test_trace_id ASC", (registry_id,))
         signatures = self.cur.fetchall()
         return signatures
     
