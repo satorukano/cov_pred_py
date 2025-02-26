@@ -16,7 +16,7 @@ class VectorizeLog:
         inputs = {k: v.to(self.device) for k, v in inputs.items()}
         outputs = self.model(**inputs)
         last_hidden_state = outputs.last_hidden_state
-        sequence_embedding = last_hidden_state[:, 0, :]
+        sequence_embedding = last_hidden_state[:, 0, :].detach()
 
         return sequence_embedding
         
