@@ -5,6 +5,7 @@ class VectorizeLog:
     def __init__(self, device):
         self.tokenizer = RobertaTokenizer.from_pretrained('microsoft/codebert-base')
         self.model = RobertaModel.from_pretrained('microsoft/codebert-base')
+        self.model.to(device)
         self.device = device
 
     def vectorize(self, logs):
