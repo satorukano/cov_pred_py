@@ -41,6 +41,8 @@ def main():
     data.logs = vectors
     data.labels = ans_labels
 
+    print("finish processing data.....")
+
     classifier = DNNClassifier(768, 512, labels_dim)
     criterion = nn.BCEWithLogitsLoss()  # 多ラベル分類用の損失関数
     optimizer = optim.Adam(classifier.parameters(), lr=2e-5)

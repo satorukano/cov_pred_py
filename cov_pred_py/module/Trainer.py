@@ -19,6 +19,7 @@ class Trainer:
         return formatted_data
     
     def train(self):
+        print("Start training")
         formatted_data = self.format_data()
         train_data, val_data = train_test_split(formatted_data, test_size=0.2)
         for epoch in range(3):
